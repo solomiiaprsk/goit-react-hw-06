@@ -1,0 +1,31 @@
+.btn {
+    background-color: rgb(222, 218, 218);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    height: 48px;
+    max-width: 220px;
+}
+
+.btn:hover {
+    background-color: rgb(128, 172, 255);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 16px;
+    margin-top: 24px;
+    max-width: 400px;
+}
+
+.input {
+    display: flex;
+        flex-direction: column;
+}
