@@ -1,5 +1,4 @@
 import css from './Contact.module.css';
-import clsx from "clsx";
 import { FaUser } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa";
 

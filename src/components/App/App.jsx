@@ -4,33 +4,44 @@ import ContactList from '../ContactList/ContactList'
 import ContactForm from '../ContactForm/ContactForm'
 import SearchBox from '../SearchBox/Searchbox'
 import contactsJSON from '../../contacts.json'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 function App() {
 
-  const [contacts, setContacts] = useState(() => { 
-    const savedContacts = localStorage.getItem("savedContacts");
-    if (savedContacts !== null) {
-      return JSON.parse(savedContacts);
-    };
-    return contactsJSON;
-  });
+  // const [contacts, setContacts] = useState(() => { 
+  //   const savedContacts = localStorage.getItem("savedContacts");
+  //   if (savedContacts !== null) {
+  //     return JSON.parse(savedContacts);
+  //   };
+  //   return contactsJSON;
+  // });
+
+  const dispatch = useDispatch();
+
   const [inputValue, setInputValue] = useState("");
   
+  const contacts = useSelector((state) => state.profiles.profiles);
+  const shoUserList = useSelector((state) => state.profiles.showProfilesList);
+
   const handleChange = (newValue) => {
     setInputValue(newValue);
   };
 
   const addContact = (newContact) => {
-    setContacts((prevContacts) => {
-        return [...prevContacts, newContact];
-});
-  };
+    dispatch(addProfile(newContact));
+//     setContacts((prevContacts) => {
+//         return [...prevContacts, newContact];
+// });
+    };
+  
+
 
   const deleteContact = (contactId) => {
-    setContacts((prevContacts) => {
-      return prevContacts.filter((contact) => contact.id !== contactId);
-    });
+     dispatch(deleteProfile(contactId));
+    // setContacts((prevContacts) => {
+    //   return prevContacts.filter((contact) => contact.id !== contactId);
+    // });
   };
 
   useEffect(() => {
