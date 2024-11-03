@@ -11,37 +11,31 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// state = {
-//  profiles: {
-//     profiles: [],
-//             showProfilesList: true,
-//     }
-// }
-
+import { profileReducer } from "./contactsSlice"; // Import contactsReducer from contactsSlice
+// import profileReducer from "./path/to/profileSlice"; // Import profileReducer
+// import filtersReducer from "./path/to/filtersSlice"; // Import filtersReducer
 
 const persistedContactReducer = persistReducer(
   {
     key: "contactItems",
     storage,
-    whitelist: ["items"],
+    whitelist: ["profiles"], // Ensure 'items' exists in the contacts state
   },
-  contactsReducer
+  profileReducer
 );
 
 export const store = configureStore({
-    reducer: {
-        profiles: profileReducer,
-  contacts: persistedContactReducer,
-  filters: filtersReducer,
-    },
-    middleware: (getDefaultMiddleware) =>
+  reducer: {
+    profiles: profileReducer,
+    contacts: persistedContactReducer, // Use the persisted contact reducer here
+    // filters: filtersReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
-
-
 
 export const persistor = persistStore(store);
