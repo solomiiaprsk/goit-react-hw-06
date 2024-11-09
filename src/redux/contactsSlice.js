@@ -1,75 +1,25 @@
-// const initialState = {
-//     profiles: [],
-//     showProfilesList: true,
-// }
-// export const profileReducer = (state = initialState, action) => {
-//     switch (action.type) {
-//         case "profile/add": {
-//             return {
-//                 ...state,
-//                 profiles: [...state.profiles, action.payload]
-//             }
-//         }
-//         case "profile/delete": {
-//             return {
-//                 ...state,
-//                 profiles: state.profiles.filter(profile => profile.id !== action.payload),
-
-//             }
-//         }
-//         case "profile/showProfileList": {
-//             return {
-//                 ...state,
-//                 showProfilesList: action.payload
-//             }
-//         }
-//         default:
-//             return state;
-//     }
-// };
-// export const addProfile = (payload) => {
-//     return {
-//         type: "profile/add",
-//         payload: payload,
-//     }
-// };
-
-// export const deleteProfile = (profileId) => {
-//     return {
-//         type: "profile/delete",
-//         payload: profileId,
-//     }
-// };
-
-// export const showProfileList = (payload) => {
-//     return {
-//         type: "profile/showProfileList",
-//         payload
-//     }
-// };
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  profiles: [],
-  showProfilesList: true,
+  items: [],
 };
 
-const profileSlice = createSlice({
-  name: "profile",
+const contactsSlice = createSlice({
+  name: "contacts",
   initialState,
   reducers: {
-    addProfile: (state, action) => {
-      state.profiles.push(action.payload); 
+    addContact: (state, action) => {
+      state.items.push(action.payload);
     },
-    deleteProfile: (state, action) => {
-      state.profiles = state.profiles.filter(profile => profile.id !== action.payload);
-    },
-    showProfileList: (state, action) => {
-      state.showProfilesList = action.payload;
+    deleteContact: (state, action) => {
+      state.items = state.items.filter(
+        (profile) => profile.id !== action.payload
+      );
     },
   },
 });
 
-export const { addProfile, deleteProfile, showProfileList } = profileSlice.actions;
-export const profileReducer = profileSlice.reducer;
+export const selectContacts = (state) => state.contacts.items;
+
+export const { addContact, deleteContact } = contactsSlice.actions;
+export const contactsReducer = contactsSlice.reducer;

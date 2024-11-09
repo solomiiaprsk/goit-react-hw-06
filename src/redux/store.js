@@ -11,24 +11,21 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { profileReducer } from "./contactsSlice"; // Import contactsReducer from contactsSlice
-// import profileReducer from "./path/to/profileSlice"; // Import profileReducer
-// import filtersReducer from "./path/to/filtersSlice"; // Import filtersReducer
+import { contactsReducer } from "./contactsSlice";
+import { filterReducer } from "./filtersSlice";
 
 const persistedContactReducer = persistReducer(
   {
     key: "contactItems",
     storage,
-    whitelist: ["profiles"], // Ensure 'items' exists in the contacts state
   },
-  profileReducer
+  contactsReducer
 );
 
 export const store = configureStore({
   reducer: {
-    profiles: profileReducer,
-    contacts: persistedContactReducer, // Use the persisted contact reducer here
-    // filters: filtersReducer,
+    contacts: persistedContactReducer,
+    filters: filterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
